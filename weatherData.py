@@ -127,7 +127,7 @@ for i in range (len(train)): # change the date to a float value
 #y = da.getCollumn(train,3)
 
 
-for i in range (0,len(train)): # make the x and the output values for testing
+for i in range (0,len(train),6): # make the x and the output values for testing
     x.append(train[i])
     o.append(train[i][3])
 print x[0]
@@ -141,11 +141,11 @@ from sklearn import linear_model
 
 
 
-#svrRbf = SVR(kernel= 'linear', C = 1e3)
-#svrRbf.fit(o,y)
+svrRbf = SVR(kernel= 'linear', C = 1e3)
+svrRbf.fit(x,o)
 
-clf = linear_model.LinearRegression()
-clf.fit(x,o)
+#clf = linear_model.LinearRegression()
+#clf.fit(x,o)
 j
 # prepare the test file ______________________________________________________________________
 
@@ -179,7 +179,7 @@ test = [[float(i) for i in y ] for y in test]
 #test file ready______________________________________________________________________
 
 #now predict
-c = csv.writer(open("submit2.csv","wb"))
+c = csv.writer(open("submit3.csv","wb"))
 c.writerow(['id','units'])
 for i in range (len(test)):
 
