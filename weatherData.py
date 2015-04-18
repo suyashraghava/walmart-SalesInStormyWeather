@@ -18,59 +18,59 @@ data = [[i for i in y] for y in data]
 # working with weather_________________________________________________________
 
 
-#snow = da.getCollumn(data,13)
-#rain = da.getCollumn( data,16)
-#station = da.getCollumn(data,0)
-#date  = da.getCollumn(data,1)
-#
-#
-#
-#for i in range ( len ( rain)): # replace the Missing and trace values from the
-#
-#    if (rain[i] == 'M' or rain[i] == 'T') :
-#        rain [i] = 0.0
-#    if (snow[i] == 'M',rain[i] == 'T') :
-#        snow[i] = 0.0
-#    rain[i] = float(rain[i])
-#    snow[i] = float(snow[i])
-#
-#
-#
-#rainDate = []
-#snowDate = []
-#realDate = []
-#avgRain = 0
-#avgSnow = 0
-#count = 0
-#i = 0
-#
-#
-#
-#
-#while i < len(snow)- 1: # calculate the average rain and snow for 20 stations
-#    try:
-#        while ( date[i] == date [i+1] ):
-#            avgRain = avgRain + rain[i]
-#            avgSnow = avgSnow + snow[i]
-#
-#            count = count + 1
-#            i = i+1
-#    except IndexError:
-#        print " list index out of range "
-#        #print i
-#    realDate.append(date[i])
-#    i = i + 1
-#    rainDate.append(avgRain/count)
-#    snowDate.append(avgSnow/count)
-#    avgRain = 0
-#    avgSnow = 0
-#    count = 0
-#
-#
-#weatherImformation = [] # create a data structure with date, rain and snow
-#weatherImformation = da.addCollumn(weatherImformation,realDate)
-#weatherImformation = da.addCollumn(weatherImformation,rainDate)
-#weatherImformation = da.addCollumn(weatherImformation,snowDate)
+snow = da.getCollumn(data,13)
+rain = da.getCollumn( data,16)
+station = da.getCollumn(data,0)
+date  = da.getCollumn(data,1)
+
+
+
+for i in range ( len ( rain)): # replace the Missing and trace values from the
+
+    if (rain[i] == 'M' or rain[i] == 'T') :
+        rain [i] = 0.0
+    if (snow[i] == 'M',rain[i] == 'T') :
+        snow[i] = 0.0
+    rain[i] = float(rain[i])
+    snow[i] = float(snow[i])
+
+
+
+rainDate = []
+snowDate = []
+realDate = []
+avgRain = 0
+avgSnow = 0
+count = 0
+i = 0
+
+
+
+
+while i < len(snow)- 1: # calculate the average rain and snow for 20 stations
+    try:
+        while ( date[i] == date [i+1] ):
+            avgRain = avgRain + rain[i]
+            avgSnow = avgSnow + snow[i]
+
+            count = count + 1
+            i = i+1
+    except IndexError:
+        print " list index out of range "
+        #print i
+    realDate.append(date[i])
+    i = i + 1
+    rainDate.append(avgRain/count)
+    snowDate.append(avgSnow/count)
+    avgRain = 0
+    avgSnow = 0
+    count = 0
+
+
+weatherImformation = [] # create a data structure with date, rain and snow
+weatherImformation = da.addCollumn(weatherImformation,realDate)
+weatherImformation = da.addCollumn(weatherImformation,rainDate)
+weatherImformation = da.addCollumn(weatherImformation,snowDate)
 
 # weather complete _________________________________________________________________________
 
