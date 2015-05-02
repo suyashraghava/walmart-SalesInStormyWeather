@@ -100,22 +100,36 @@ for i in range (len(train)): # change the date to a float value
     buff = train[i][0]
     buff = buff[:4] + buff[5:7] + buff[8:]
     train[i][0] = float(buff)
+# prepare the test file ____________________________________________________
+
+for i in range (len(test)): # change date to a float value
+
+    buff = test[i][0]
+    buff = buff[:4] + buff[5:7] + buff[8:]
+    test[i][0] = float(buff)
+
+trainDate = da.getCollumn(train,0)
+dateMap = {}
+for i in range(len(train)): # add the extra weather data according to the date
+    dateMap[trainDate[i]] = train [i]
+buff = []
+for i in range(len(test)):
+    buff = dateMap[test[i][0]]
+    test[i].append(buff[3])
+    test[i].append(buff[4])
+    test[i].append(buff[5])
+print buff
+
+test = [[float(i) for i in y ] for y in test]
+#test file ready__________________________________________________________
+
 
 
 
 c = 3
-for i in range (0,len(train)): # make the x and the output values for testing
-    #if ( i != len(train) -1 ) :
-        #if (train[i][0] != train[i+1][0]):
-                #c = c + 1
-    #if ( c%3 == 0 ):
-    if ( train[i][4] >1 or train[i][5] > 2):
-        if ( i != len(train) -1 ) :
-            if (train[i][0] != train[i+1][0]):
-                c = c + 1
-        if ( c%3 == 0 ):
-         x.append(train[i])
-         o.append(train[i][3])
+for i in range (len(test)): # make the x and the output values for testing
+         x.append(test[i])
+         o.append(test[i][3])
 
 p = csv.writer(open('preparedData.csv',"wb"))# write data for validating the model
 for i in train:
@@ -124,12 +138,13 @@ q = csv.writer(open('testData.csv',"wb"))# write data for validating the model
 for i in x:
     q.writerow(i)
 
-
-
+print train[0]
+print x[0]
+print test[0]
 da.delCollumn(x,3)
 
-print len(x)
-print len(train)
+print x[0]
+print test[0]
 #sys.exit('')
 #train data ready
 #___________________________________________________________________________
@@ -145,26 +160,6 @@ clf = DecisionTreeRegressor(max_depth = 16)
 
 clf.fit(x,o)
 print "complete"
-# prepare the test file ____________________________________________________
-
-for i in range (len(test)): # change date to a float value
-
-    buff = test[i][0]
-    buff = buff[:4] + buff[5:7] + buff[8:]
-    test[i][0] = float(buff)
-
-trainDate = da.getCollumn(train,0)
-dateMap = {}
-for i in range(len(train)): # add the extra weather data according to the date
-    dateMap[trainDate[i]] = train [i]
-for i in range(len(test)):
-    buff = dateMap[test[i][0]]
-    test[i].append(buff[3])
-    test[i].append(buff[4])
-
-
-test = [[float(i) for i in y ] for y in test]
-#test file ready__________________________________________________________
 
 #now predict
 c = csv.writer(open("submit5.csv","wb"))

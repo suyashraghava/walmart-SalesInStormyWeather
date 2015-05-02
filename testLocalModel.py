@@ -7,7 +7,7 @@ import main as da
 train= csv.reader(open(r'preparedData.csv'))
 train= [[i for i in y ] for y in train]
 train= [[float(i) for i in y ] for y in train]
-actualValue = da.getCollumn(train,3)
+#actualValue = da.getCollumn(train,3)
 da.delCollumn(train,3)
 
 x = csv.reader(open(r'testData.csv'))
@@ -19,7 +19,7 @@ print "data uploaded"
 
 from sklearn.tree import DecisionTreeRegressor
 
-clf = DecisionTreeRegressor(max_depth = 14)
+clf = DecisionTreeRegressor(max_depth = 16)
 #16:18=45,14=48
 #from sklearn.svm import SVR
 #clf= SVR(kernel= 'rbf', C = 1e3)
@@ -29,13 +29,13 @@ clf.fit(x,o)
 
 print ' trained'
 y = []
-for i in range(len(train)):
-    y.append(max(0,clf.predict(train[i])))
+for i in range(len(x)):
+    y.append(max(0,clf.predict(x[i])))
 print 'predict'
 error = 0
 for i in range (len(y)):
 
-    error = error + (math.log(y[i] + 1)  - math.log(actualValue[i] +1))  ** 2
+    error = error + (math.log(y[i] + 1)  - math.log(o[i] +1))  ** 2
 
 error = error/ float(len(y))
 error = math.sqrt(error)
