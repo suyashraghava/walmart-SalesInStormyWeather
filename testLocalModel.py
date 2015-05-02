@@ -19,8 +19,8 @@ print "data uploaded"
 
 from sklearn.tree import DecisionTreeRegressor
 
-clf = DecisionTreeRegressor(max_depth = 14)
-#16:18=45,14=48
+clf = DecisionTreeRegressor(max_depth = 52)
+#16:18=45,14=48,22=0.075,24=0,067,26=0.06,28=0.056,32=0.053,34=0,05,40=0.049
 #from sklearn.svm import SVR
 #clf= SVR(kernel= 'rbf', C = 1e3)
 #from sklearn import linear_model

@@ -103,19 +103,41 @@ for i in range (len(train)): # change the date to a float value
 
 
 
-c = 3
-for i in range (0,len(train)): # make the x and the output values for testing
-    #if ( i != len(train) -1 ) :
-        #if (train[i][0] != train[i+1][0]):
-                #c = c + 1
-    #if ( c%3 == 0 ):
-    if ( train[i][4] >1 or train[i][5] > 2):
-        if ( i != len(train) -1 ) :
-            if (train[i][0] != train[i+1][0]):
-                c = c + 1
-        if ( c%3 == 0 ):
-         x.append(train[i])
-         o.append(train[i][3])
+c = 0
+f = 0
+
+#add three days before and after an event
+#for i in range (0,len(train)): # make the x and the output values for testing
+#    print i
+#    if ( train[i][4] >1 or train[i][5] > 2):
+#
+#        f = i
+#        while c < 3 :
+#            if ( f != len(train) -1 ) :
+#                if (train[f][0] != train[f+1][0]):
+#                    c = c + 1
+#                if(train[f] not in x):
+#                    x.append(train[f])
+#                    o.append(train[f][3])
+#            f = f +1
+#        f = i
+#        c = 0
+#        while c < 3:
+#            if ( f >= 0) :
+#                if ( train[f][0] != train[f-1][0]):
+#                    c = c + 1
+#                if ( train[f] not in x):
+#                    x.append(train[f])
+#                    o.append(train[f][3])
+#            f = f-1
+#        c = 0
+
+#add all data to fit
+for i in range(len(train)):
+    x.append(train[i])
+    o.append(train[i][3])
+
+
 
 p = csv.writer(open('preparedData.csv',"wb"))# write data for validating the model
 for i in train:
@@ -139,7 +161,7 @@ print len(train)
 from sklearn.tree import DecisionTreeRegressor
 
 #clf= SVR(kernel= 'rbf', C = 1e3)
-clf = DecisionTreeRegressor(max_depth = 16)
+clf = DecisionTreeRegressor(max_depth = 36)
 
 #clf = linear_model.LinearRegression()
 
