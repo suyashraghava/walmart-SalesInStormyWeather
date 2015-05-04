@@ -112,25 +112,25 @@ f = 0
 #    if ( train[i][4] >1 or train[i][5] > 2):
 #
 #        f = i
-#        while c < 3 :
-#            if ( f != len(train) -1 ) :
-#                if (train[f][0] != train[f+1][0]):
-#                    c = c + 1
-#                if(train[f] not in x):
+#
+#        if(train[f] not in x):
+#            while c < 3 :
+#                if ( f != len(train) -1 ) :
+#                    if (train[f][0] != train[f+1][0]):
+#                        c = c + 1
 #                    x.append(train[f])
 #                    o.append(train[f][3])
-#            f = f +1
-#        f = i
-#        c = 0
-#        while c < 3:
-#            if ( f >= 0) :
-#                if ( train[f][0] != train[f-1][0]):
-#                    c = c + 1
-#                if ( train[f] not in x):
+#                f = f +1
+#
+#        if ( train[f] not in x ):
+#            while c < 3:
+#                if ( f >= 0) :
+#                    if ( train[f][0] != train[f-1][0]):
+#                        c = c + 1
 #                    x.append(train[f])
 #                    o.append(train[f][3])
-#            f = f-1
-#        c = 0
+#                f = f-1
+#            c = 0
 
 #add all data to fit
 for i in range(len(train)):
