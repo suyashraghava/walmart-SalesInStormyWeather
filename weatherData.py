@@ -178,9 +178,9 @@ for i in range (len(test)): # change date to a float value
 trainDate = da.getCollumn(train,0)
 dateMap = {}
 for i in range(len(train)): # add the extra weather data according to the date
-    dateMap[trainDate[i]] = train [i]
+    dateMap[str(trainDate[i])+str(train[i][1])] = train [i]
 for i in range(len(test)):
-    buff = dateMap[test[i][0]]
+    buff = dateMap[str(test[i][0])+str(test[i][1])]
     test[i].append(buff[3])
     test[i].append(buff[4])
 
