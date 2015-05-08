@@ -19,23 +19,23 @@ print "data uploaded"
 
 from sklearn.tree import DecisionTreeRegressor
 
-#clf = DecisionTreeRegressor(max_depth = 2)
+clf = DecisionTreeRegressor(max_depth =34)
 #16:18=45,14=48
 #from sklearn.svm import SVR
 #clf= SVR(kernel= 'rbf', C = 1e3)
-from sklearn import linear_model
-clf = linear_model.LinearRegression()
+#from sklearn import linear_model
+#clf = linear_model.LinearRegression()
 clf.fit(x,o)
 
 print ' trained'
 y = []
-for i in range(int(len(x)*0.7)):
+for i in range(len(x)):
     y.append(max(0,clf.predict(x[i])))
 print 'predict'
 error = 0
 
 from sklearn.metrics import mean_squared_error
-print mean_squared_error(o,y)
+print mean_squared_error(y,o)
 for i in range (len(y)):
 
     error = error + (math.log(y[i] + 1)  - math.log(o[i] +1))  ** 2
