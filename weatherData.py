@@ -101,42 +101,50 @@ for i in range (len(train)): # change the date to a float value
     buff = buff[:4] + buff[5:7] + buff[8:]
     train[i][0] = float(buff)
 
-
+print len(train[0])
 
 c = 0
 f = 0
-
+dateMem = ['r']
+trainDate = da.getCollumn(train,0)
 #add three days before and after an event
-#for i in range (0,len(train)): # make the x and the output values for testing
-#    print i
-#    if ( train[i][4] >1 or train[i][5] > 2):
-#
-#        f = i
-#
-#        if(train[f] not in x):
-#            while c < 3 :
-#                if ( f != len(train) -1 ) :
-#                    if (train[f][0] != train[f+1][0]):
-#                        c = c + 1
-#                    x.append(train[f])
-#                    o.append(train[f][3])
-#                f = f +1
-#
-#        if ( train[f] not in x ):
-#            while c < 3:
-#                if ( f >= 0) :
-#                    if ( train[f][0] != train[f-1][0]):
-#                        c = c + 1
-#                    x.append(train[f])
-#                    o.append(train[f][3])
-#                f = f-1
-#            c = 0
+for i in range (0,len(train)): # make the x and the output values for testing
+    if ( train[i][4] >1 or train[i][5] > 2):
+
+        f = i
+        if(trainDate[i] not in  dateMem):
+
+            while c < 3 :
+                if ( f != len(train) -1 ) :
+                    if (train[f][0] != train[f+1][0]):
+                        c = c + 1
+                        dateMem.append(trainDate[f])
+                    if (trainDate[f] not in dateMem):
+                        x.append(train[f][:4])
+                        o.append(train[f][3])
+
+                f = f +1
+            f = i
+            c = 0
+
+            while c < 3:
+                if ( f >= 0) :
+                    if ( train[f][0] != train[f-1][0]):
+                       c = c + 1
+                       dateMem.append(trainDate[f])
+                    if ( trainDate[f] not in dateMem):
+                        x.append(train[f][:4])
+                        o.append(train[f][3])
+                f = f-1
+            c = 0
+            dateMem.append(trainDate[i])
+
 
 #add all data to fit
-for i in range(len(train)):
-    x.append(train[i])
-    o.append(train[i][3])
-
+#for i in range(len(train)):
+#    x.append(train[i])
+#    o.append(train[i][3])
+#
 
 
 p = csv.writer(open('preparedData.csv',"wb"))# write data for validating the model
@@ -151,7 +159,7 @@ for i in x:
 da.delCollumn(x,3)
 
 print len(x)
-print len(train)
+print len(x[0])
 #sys.exit('')
 #train data ready
 #___________________________________________________________________________
@@ -174,15 +182,15 @@ for i in range (len(test)): # change date to a float value
     buff = test[i][0]
     buff = buff[:4] + buff[5:7] + buff[8:]
     test[i][0] = float(buff)
-
-trainDate = da.getCollumn(train,0)
+print 'test',len(test[0])
+print 'test',len(test)
 dateMap = {}
-for i in range(len(train)): # add the extra weather data according to the date
-    dateMap[str(trainDate[i])+str(train[i][1])] = train [i]
-for i in range(len(test)):
-    buff = dateMap[str(test[i][0])+str(test[i][1])]
-    test[i].append(buff[3])
-    test[i].append(buff[4])
+#for i in range(len(train)): # add the extra weather data according to the date
+#    dateMap[str(trainDate[i])+str(train[i][1])] = train [i]
+#for i in range(len(test)):
+#    buff = dateMap[str(test[i][0])+str(test[i][1])]
+#    test[i].append(buff[3])
+#    test[i].append(buff[4])
 
 
 test = [[float(i) for i in y ] for y in test]

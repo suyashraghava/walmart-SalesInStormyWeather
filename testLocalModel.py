@@ -4,12 +4,12 @@ import numpy as np
 import six
 import main as da
 
-train= csv.reader(open(r'preparedData.csv'))
-train= [[i for i in y ] for y in train]
-train= [[float(i) for i in y ] for y in train]
-actualValue = da.getCollumn(train,3)
-da.delCollumn(train,3)
-
+#train= csv.reader(open(r'preparedData.csv'))
+#train= [[i for i in y ] for y in train]
+#train= [[float(i) for i in y ] for y in train]
+#actualValue = da.getCollumn(train,3)
+#print len(train[0])
+#da.delCollumn(train,3)
 x = csv.reader(open(r'testData.csv'))
 x = [[i for i in y ] for y in x]
 x = [[float(i) for i in y ] for y in x]
@@ -19,7 +19,7 @@ print "data uploaded"
 
 from sklearn.tree import DecisionTreeRegressor
 
-clf = DecisionTreeRegressor(max_depth = 54)
+clf = DecisionTreeRegressor(max_depth = 38)
 
 #16:18=45,14=48,22=0.075,24=0,067,26=0.06,28=0.056,32=0.053,34=0,05,40=0.049
 #from sklearn.svm import SVR
@@ -30,13 +30,13 @@ clf.fit(x,o)
 
 print ' trained'
 y = []
-for i in range(len(train)):
-    y.append(max(0,clf.predict(train[i])))
+for i in range(len(x)):
+    y.append(max(0,clf.predict(x[i])))
 print 'predict'
 error = 0
 for i in range (len(y)):
 
-    error = error + (math.log(y[i] + 1)  - math.log(actualValue[i] +1))  ** 2
+    error = error + (math.log(y[i] + 1)  - math.log(o[i] +1))  ** 2
 
 error = error/ float(len(y))
 error = math.sqrt(error)
