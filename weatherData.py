@@ -27,6 +27,7 @@ for i in range(len(key)):
 
 snow = da.getCollumn(data,13)
 rain = da.getCollumn( data,14)
+codeSum = da.getCollumn(data,12)
 station = da.getCollumn(data,0)
 date  = da.getCollumn(data,1)
 
@@ -89,11 +90,12 @@ k = 0
 # adding weather data according to the station and store relation using keys
 stationStore ={}
 for i in range( len(data)):
-    stationStore[str(data[i][1])+str(data[i][0])] = [rain[i],snow[i]]
+    stationStore[str(data[i][1])+str(data[i][0])] = [rain[i],snow[i],codeSum[i]]
 for i in range( len(train)):
     buff = stationStore[str(train[i][0])+str(keyS[train[i][1]])]
     train[i].append(buff[0])
     train[i].append(buff[1])
+    train[i].append(buff[2])
 
 for i in range (len(train)): # change the date to a float value
 
@@ -109,10 +111,11 @@ dateMem = ['r']
 trainDate = da.getCollumn(train,0)
 #add three days before and after an event
 for i in range (0,len(train)): # make the x and the output values for testing
-    if ( train[i][4] >1 or train[i][5] > 2):
+    print i
+    if ( train[i][4] >1 or train[i][5] > 2 or train[i][6] =='SN' or train[i][6]== 'RA'):
 
         f = i
-        if(trainDate[i] not in  dateMem):
+        if(trainDate[i] !=  dateMem[len(dateMem)-1]):
 
             while c < 3 :
                 if ( f != len(train) -1 ) :
@@ -145,7 +148,7 @@ for i in range (0,len(train)): # make the x and the output values for testing
 #    x.append(train[i])
 #    o.append(train[i][3])
 #
-
+print 'test infinite'
 
 p = csv.writer(open('preparedData.csv',"wb"))# write data for validating the model
 for i in train:
@@ -158,22 +161,24 @@ for i in x:
 
 da.delCollumn(x,3)
 
-print len(x)
-print len(x[0])
+print len(x[0]),'x'
+print len(train[0]),'train'
 #sys.exit('')
 #train data ready
 #___________________________________________________________________________
 
 #from sklearn.svm import SVR
 #from sklearn import linear_model
-from sklearn.tree import DecisionTreeRegressor
+#wfrom sklearn.tree import DecisionTreeRegressor
 
 #clf= SVR(kernel= 'rbf', C = 1e3)
-clf = DecisionTreeRegressor(max_depth = 36)
-
+#clf = DecisionTreeRegressor(max_depth = 36)
 #clf = linear_model.LinearRegression()
 
-clf.fit(x,o)
+from sklearn.ensemble import RandomForestRegressor
+clf = RandomForestRegressor(random_state=0, n_estimators=300,max_depth = 34)
+
+#clf.fit(x,o)
 print "complete"
 # prepare the test file ____________________________________________________
 
@@ -203,7 +208,7 @@ for i in range (len(test)):# add the prediction to the submit file
 
     buff = str(testO[i][1]) + "_" + str(testO[i][2]) + "_" + str(testO[i][0])
 
-    c.writerow( [  buff , str(int(max(0,clf.predict(test[i])))) ] )
+#    c.writerow( [  buff , str(int(max(0,clf.predict(test[i])))) ] )
 
 #add the predicting data to a testValidate file so as to test the model locally
 
