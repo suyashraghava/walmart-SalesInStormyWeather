@@ -8,11 +8,15 @@ train= csv.reader(open(r'preparedData.csv'))
 train= [[i for i in y ] for y in train]
 train= [[float(i) for i in y ] for y in train]
 actualValue = []
-for i in range(1806350,len(train),1000):
+for i in range(1806350,len(train),10):
     actualValue.append(train[i][3])
+
+
+print len(train[0])
+da.delCollumn(train,5)
+da.delCollumn(train,4)
 da.delCollumn(train,3)
 print len(actualValue)
-print len(train[0])
 
 
 x = csv.reader(open(r'testData.csv'))
@@ -30,20 +34,21 @@ print "data uploaded"
 #from sklearn import linear_model
 #clf = linear_model.LinearRegression()
 from sklearn.ensemble import RandomForestRegressor
-clf = RandomForestRegressor(random_state=0, n_estimators=300,max_depth = 36)
+clf = RandomForestRegressor(random_state=0, n_estimators=60,max_depth = 38)
 
 
 clf.fit(x,o)
 
 print ' trained'
 y = []
-for i in range(1806350,len(train),10000):
+for i in range(1806350,len(train),10):
     y.append(max(0,clf.predict(train[i])))
 print 'predict'
+print len(y)
 error = 0
 for i in range (len(y)):
 
-    error = error + (math.log(y[i] + 1)  - math.log(o[i] +1))  ** 2
+    error = error + (math.log(y[i] + 1)  - math.log(actualValue [i] +1))  ** 2
 
 error = error/ float(len(y))
 error = math.sqrt(error)

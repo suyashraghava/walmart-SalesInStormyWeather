@@ -95,7 +95,7 @@ for i in range( len(train)):
     buff = stationStore[str(train[i][0])+str(keyS[train[i][1]])]
     train[i].append(buff[0])
     train[i].append(buff[1])
-    train[i].append(buff[2])
+#    train[i].append(buff[2])
 
 for i in range (len(train)): # change the date to a float value
 
@@ -110,12 +110,11 @@ f = 0
 dateMem = ['r']
 trainDate = da.getCollumn(train,0)
 #add three days before and after an event
-for i in range (0,len(train)): # make the x and the output values for testing
-    print i
-    if ( train[i][4] >1 or train[i][5] > 2 or train[i][6] =='SN' or train[i][6]== 'RA'):
+for i in range (0,len(train),10): # make the x and the output values for testing
+    if ( train[i][4] >1 or train[i][5] > 2 ):#or train[i][6] =='SN' or train[i][6]== 'RA'):
 
         f = i
-        if(trainDate[i] !=  dateMem[len(dateMem)-1]):
+        if(trainDate[i] not in    dateMem):
 
             while c < 3 :
                 if ( f != len(train) -1 ) :
@@ -130,17 +129,17 @@ for i in range (0,len(train)): # make the x and the output values for testing
             f = i
             c = 0
 
-            while c < 3:
-                if ( f >= 0) :
-                    if ( train[f][0] != train[f-1][0]):
-                       c = c + 1
-                       dateMem.append(trainDate[f])
-                    if ( trainDate[f] not in dateMem):
-                        x.append(train[f][:4])
-                        o.append(train[f][3])
-                f = f-1
-            c = 0
-            dateMem.append(trainDate[i])
+#            while c < 3:
+#                if ( f >= 0) :
+#                    if ( train[f][0] != train[f-1][0]):
+#                       c = c + 1
+#                       dateMem.append(trainDate[f])
+#                    if ( trainDate[f] not in dateMem):
+#                        x.append(train[f][:4])
+#                        o.append(train[f][3])
+#                f = f-1
+#            c = 0
+#            dateMem.append(trainDate[i])
 
 
 #add all data to fit
@@ -158,7 +157,7 @@ for i in x:
     q.writerow(i)
 
 
-
+print len(x),'x len'
 da.delCollumn(x,3)
 
 print len(x[0]),'x'
@@ -176,7 +175,7 @@ print len(train[0]),'train'
 #clf = linear_model.LinearRegression()
 
 from sklearn.ensemble import RandomForestRegressor
-clf = RandomForestRegressor(random_state=0, n_estimators=300,max_depth = 34)
+clf = RandomForestRegressor(random_state=0, n_estimators=60,max_depth = 38)
 
 #clf.fit(x,o)
 print "complete"
