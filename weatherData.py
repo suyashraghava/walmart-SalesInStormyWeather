@@ -127,17 +127,21 @@ test = [[float(i) for i in y ] for y in test]
 
 
 c = 3
-indexMemory =['r']
-for i in range (len(test)): # make the x and the output values for testing
-    if (test[i][0] != indexMemory[len(indexMemory)-1]):
-            index = trainDate.index(test[i][0])
-            j = index
-            while (trainDate[j] == trainDate[j+1]):
-                x.append(train[j])
-                o.append(train[j][3])
-                j= j+ 1
+#indexMemory =['r']
+#for i in range (len(test)): # make the x and the output values for testing
+#    if (test[i][0] != indexMemory[len(indexMemory)-1]):
+#            index = trainDate.index(test[i][0])
+#            j = index
+#            while (trainDate[j] == trainDate[j+1]):
+#                x.append(train[j])
+#                o.append(train[j][3])
+#                j= j+ 1
+#
+#    indexMemory.append(test[i][0])
 
-    indexMemory.append(test[i][0])
+for i in range (1806305, len(train),2):#for all data
+        x.append(train[i])
+        o.append(train[i][3])
 
 p = csv.writer(open('preparedData.csv',"wb"))# write data for validating the model
 for i in train:
@@ -146,9 +150,7 @@ q = csv.writer(open('testData.csv',"wb"))# write data for validating the model
 for i in x:
     q.writerow(i)
 
-print train[0]
-print x[0]
-print test[0]
+print len(x)
 da.delCollumn(x,3)
 
 print len(x)
@@ -159,12 +161,12 @@ print len(test)
 
 #from sklearn.svm import SVR
 #from sklearn import linear_model
-from sklearn.tree import DecisionTreeRegressor
+#from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 #clf= SVR(kernel= 'rbf', C = 1e3)
 
 #clf = DecisionTreeRegressor(max_depth = 34)
-clf = RandomForestRegressor(random_state = 0, n_estimators=600,max_depth=44)
+clf = RandomForestRegressor(random_state = 0, n_estimators=60,max_depth=38)
 #clf = linear_model.LinearRegression()
 
 clf.fit(x,o)

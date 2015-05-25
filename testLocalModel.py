@@ -9,10 +9,10 @@ train= [[i for i in y ] for y in train]
 train= [[float(i) for i in y ] for y in train]
 #actualValue = da.getCollumn(train,3)
 actualValue = []
-for i in train[1806305:]:
-    actualValue.append(i[3])
+for i in range( 1806305,  len(train),5) :
+    actualValue.append(train[i][3])
 da.delCollumn(train,3)
-
+print len(actualValue)
 x = csv.reader(open(r'testData.csv'))
 x = [[i for i in y ] for y in x]
 x = [[float(i) for i in y ] for y in x]
@@ -30,18 +30,17 @@ print "data uploaded"
 #clf = linear_model.LinearRegression()
 
 from sklearn.ensemble import RandomForestRegressor
-clf = RandomForestRegressor(random_state = 0, n_estimators=300,max_depth=34)
+clf = RandomForestRegressor(random_state = 0, n_estimators= 60 ,max_depth=44)
 
 #from sklearn.ensemble import GradientBoostingClassifier
 #clf = GradientBoostingClassifier(n_estimators = 100, max_depth = 1, random_state = 0)
-
 
 clf.fit(x,o)
 
 print ' trained'
 y = []
-for i in train[1806305:]:
-    y.append(max(0,clf.predict(i)))
+for i in range( 1806305,len(train),5):
+    y.append(max(0,clf.predict(train[i])))
 print 'predict'
 error = 0
 
