@@ -30,7 +30,7 @@ print "data uploaded"
 #clf = linear_model.LinearRegression()
 
 from sklearn.ensemble import RandomForestRegressor
-clf = RandomForestRegressor(random_state = 0, n_estimators= 60 ,max_depth=44)
+clf = RandomForestRegressor(random_state = 0, n_estimators= 60 ,max_depth=34)
 
 #from sklearn.ensemble import GradientBoostingClassifier
 #clf = GradientBoostingClassifier(n_estimators = 100, max_depth = 1, random_state = 0)

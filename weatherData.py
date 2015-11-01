@@ -139,7 +139,7 @@ c = 3
 #
 #    indexMemory.append(test[i][0])
 
-for i in range (1806305, len(train),2):#for all data
+for i in range (1806305, len(train),3):#for all data
         x.append(train[i])
         o.append(train[i][3])
 
