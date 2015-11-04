@@ -1,4 +1,4 @@
-# [walmart-SalesInStormyWeather](*https://www.kaggle.com/c/walmart-recruiting-sales-in-stormy-weather*).
+# [walmart-SalesInStormyWeather](https://www.kaggle.com/c/walmart-recruiting-sales-in-stormy-weather)
 
 This is the code for a machine learning competition hosted on kaggle by Walmart Labs. Participants were asked to accurately
 predict the sales of 111 potentially weather-sensitive products (like umbrellas, bread, and milk) around the time of 
