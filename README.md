@@ -1,4 +1,4 @@
-# [walmart-SalesInStormyWeather](https://www.kaggle.com/c/walmart-recruiting-sales-in-stormy-weather)
+# [Walmart Sales In Stormy Weather](https://www.kaggle.com/c/walmart-recruiting-sales-in-stormy-weather)
 
 This is the code for a machine learning competition hosted on kaggle by Walmart Labs. Participants were asked to accurately
 predict the sales of 111 potentially weather-sensitive products (like umbrellas, bread, and milk) around the time of 
@@ -19,7 +19,7 @@ trees have a bad habbit of overfitting so using Random Forest for improving over
  
 I was able to fit the model at decent accuracy and it was performing well on validation and test set. At that time I
 was at top 25 percent on the Leader board. However it was becoming harder to keep up. Anyways when 
-the competition ended and the model was tested on the full test data, my model performed in top 30 percent. 
+the competition ended and the model was tested on the full test data, my model performed in top 28 percent. I was able to get a Root mean square error of 0.11355. 
 
 The biggest mistake that I made was that even though I extracted the data according to the date when there was a weather event,
 in spirit of competition I should have simply removed the data upto the date from where the test data started.
